@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'gramapp',
     'bootstrap4',
     'vote',
+    'registration',
+    'tinymce',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
