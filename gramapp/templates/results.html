@@ -5,7 +5,7 @@
     <div class="row">
         {% if results %}
             {% for search in results %}
-            <div class="row" style="overflow:hidden;-webkit-border-radius:50px; -moz-border-radius:50px; border-radius:100px; width:90px;height:100px;">
+            <div class="row" style="overflow:hidden;-webkit-border-radius:50px; -moz-border-radius:50px; border-radius:100px; width:90px;height:100px; font-family: 'Pacifico', cursive; font-size:30px;">
                 {% if result.profile_pic %}
                 <img src="{{search.profile_pic.cdn_url}}"  alt="image">
                 {% else %}

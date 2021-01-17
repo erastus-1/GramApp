@@ -10,8 +10,8 @@
       <div class="row">
           {% for image in posts %}
           <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8 mx-auto mb-3">
-              <div class="card">
-                  <div class="card-header ">
+              <div class="card" style="font-family: 'Pacifico', cursive; font-size:30px;">
+                  <div class="card-header">
                       {% if image %}
                       <img src="{{user.profile.photo.url}} " alt="" style="width:50px; height:50px; border-radius:50px;z-index:3;"><span class="ml-3">{{image.profile.username}}</span>
                         {% else %}
