@@ -1,8 +1,12 @@
+from .models import Image, Profile,Comment,Follow,Likes
+from .forms import ProfileForm,ImageForm,CommentForm
 from django.http  import HttpResponse,Http404
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from django.contrib.auth.models import User
+
 
 # Create your views here.
-# @login_required(login_url='/accounts/login/')
+@login_required(login_url='/accounts/login/')
 def home(request):
     current_user = request.user
     all_images = Image.objects.all()
@@ -12,7 +16,7 @@ def home(request):
     print(likes)
     return render(request,'home.html',locals())
 
-# @login_required(login_url='accounts/login/')
+@login_required(login_url='accounts/login/')
 def add_image(request):
     current_user = request.user
     if request.method == 'POST':
