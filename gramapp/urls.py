@@ -11,7 +11,6 @@ urlpatterns=[
     url('showprofile/(?P<id>\d+)',views.display_profile,name = 'showprofile'),
     url('comment/(?P<image_id>\d+)', views.comment, name='comment'),
     url('follow/(?P<user_id>\d+)', views.follow, name = 'follow'),
-    url('unfollow/(?P<user_id>\d+)', views.unfollow, name='unfollow'),
     url('like/(\d+)/$', views.like,name='like')
 ]
 if settings.DEBUG:

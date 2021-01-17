@@ -31,7 +31,7 @@ def add_image(request):
             return redirect('home')
     else:
         form = ImageForm()
-    return render(request,'image.html',{"form":form})
+    return render(request,'image.html',locals())
 
 
 @login_required(login_url='/login')
@@ -47,7 +47,7 @@ def profile(request):
     else:
         form=ProfileForm()
 
-    return render(request, 'profile/profile.html',{"form":form})
+    return render(request, 'profile/new.html', locals())
 
 
 @login_required(login_url='/accounts/login/')
@@ -63,7 +63,7 @@ def display_profile(request, id):
     people=User.objects.all()
     pip_following=Follow.objects.following(request.user)
 
-    return render(request,'profile/profile.html', {"images": images, "profile":profile})
+    return render(request,'profile/profile.html',locals())
 
 
 
@@ -77,9 +77,9 @@ def search(request):
         message = f'{search_term}'
         profile_pic = User.objects.all()
 
-        return render(request,'search.html',{"message":message, 'results':results, 'profile_pic':profile_pic})
+        return render(request,'results.html',locals())
 
-    return render(request, 'search.html', {'message':message})
+    return redirect(home)
 
 @login_required(login_url='/accounts/login/')
 def comment(request,image_id):
@@ -109,11 +109,6 @@ def follow(request,user_id):
 
     return redirect('/profile/', locals())
 
-def unfollow(request, user_id):
-    other_user = User.objects.get(id = user_id)
-    follow = Follow.objects.remove_follower(request.user, other_user)
-
-    return redirect('home')
 
 @login_required(login_url='/accounts/login/')
 def like(request, image_id):
