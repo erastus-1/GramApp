@@ -1,46 +1,82 @@
-<nav class="navbar navbar-expand-lg" id="navMain">
+<!-- <nav class="navbar navbar-expand-lg" id="navMain">
   <div class="container">
-    <a class="" href="/"><i class="fa fa-instagram"></i> GramApp</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-      data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-      aria-label="Toggle navigation">
-      <i class="fa fa-bars"></i>
-    </button>
-    {% if user.is_authenticated %}
-    <a class="nav-link open-nav" href="{% url 'upload_image'%}">
-      <i class="fa fa-upload" style="font-size: 30px;color: black"></i>Upload</a>
-    {%endif%}
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <div class="container-fluid">
-        {% if user.is_authenticated %}
-        <div class="row">
-          <div class="col-md-12 nav-search">
-            <form class="form-inline my-2 my-lg-0" role="search" action="{% url 'search' %}">
-              <input class="form-control my-2 my-sm-0 search-input" name="username" type="search"
-                placeholder="Search Users" aria-label="Search">
-            </form>
+      <a class="" href="/"><i class="fa fa-instagram"style="font-size:30px;color:black" ></i></a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+          aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fa fa-bars"></i>
+      </button>
+      {% if user.is_authenticated %}
+      <a class="nav-link open-nav" href="{% url 'upload_image'%}">
+          <i class="fa fa-upload" style="font-size: 30px;color: black"></i>Upload</a>
+      {%endif%}
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+          <div class="container-fluid">
+                                  {% if user.is_authenticated %}
+              <div class="row">
+                  <div class="col-md-12 nav-search">
+                      <form class="form-inline my-2 my-lg-0" role="search" action="{% url 'search' %}">
+                          <input class="form-control my-2 my-sm-0 search-input" name="username" type="search" placeholder="Search Users" aria-label="Search">
+                      </form>
+                  </div>
+              </div>
           </div>
-        </div>
+          {%endif%}
+
+          <ul class="navbar-nav ml-auto" style="list-style: none">
+              <li class="nav-item">
+                  {% if user.is_authenticated %}
+                  <a class="nav-link open-nav" href="{% url 'showprofile' id=user.id %}"><i class="fa fa-user" style="font-size:30px;color:black">{{user}}</i></a>
+              </li>
+
+          </ul>
+
+          <ul  class="navbar-nav ml-auto" style="list-style: none">
+                 <li>
+                     <i class="fa fa-sign-out" aria-hidden="true"></i>
+                  <a href="/logout">Logout</a>
+                 </li>
+          </ul>
+                              {%endif%}
+
       </div>
-      {%endif%}
+  </div>
+</nav> -->
 
-      <ul class="navbar-nav ml-auto" style="list-style: none">
-        <li class="nav-item">
-          {% if user.is_authenticated %}
-          <a class="nav-link open-nav" href="#"><i class="fa fa-user"
-              style="font-size:30px;color:black">{{user}}</i></a>
-        </li>
 
-      </ul>
 
-      <ul class="navbar-nav ml-auto" style="list-style: none">
-        <li>
-          <i class="fa fa-sign-out" aria-hidden="true"></i>
-          <a href="/logout">Logout</a>
-        </li>
-      </ul>
-      {%endif%}
 
+
+
+ <nav class="navbar navbar-expand-md navbar-light bg-white fixed-top">
+  <div class="container">
+    <a class="navbar-brand mr-4" style="font-family: 'Lobster Two', cursive;
+    font-family: 'Playball', cursive;font-size: 30px;
+    " href="{% url 'home' %}"><i class="fa fa-instagram"></i>GramApp</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarToggle">
+      <div class="navbar-nav mr-auto">
+        <a class="nav-item nav-link" style="color: black;" href="{% url 'home' %}">Home</a>
+        
+      </div>
+    <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}">
+        <input style="border-radius: 70px;" class="form-control mr-sm-2" type="search" name="username" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-dark my-2 my-sm-0" type="submit"><i class="fa fa-search"></i>
+          
+        </button>
+      </form>
+       <!-- #Navbar Right Side -->
+      <div class="navbar-nav">
+        {% if user.is_authenticated %}
+        <a style="color: black;" class="nav-item nav-link" href="{% url 'upload_image'%}">Post Gram</a>
+        <a style="color: black;" class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
+        <a style="color: black;" class="nav-item nav-link" href="{% url 'logout' %}?next={% url 'login' %}">Logout</a>
+        {% else %}
+        <a style="color: black;" class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+        <a  style="color: black;" class="nav-item nav-link" href="#">Register</a>
+        {% endif %}
+      </div>
     </div>
   </div>
-</nav>
+</nav> 

@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from .models import Image, Profile,Comment,Follow,Likes
 from .forms import ProfileForm,ImageForm,CommentForm
+from friendship.exceptions import AlreadyExistsError
 from django.contrib.auth import views as auth_views
 from django.http  import HttpResponse,Http404
 from django.shortcuts import render,redirect
@@ -46,7 +47,7 @@ def profile(request):
     else:
         form=ProfileForm()
 
-    return render(request, 'profile/new.html',{"form":form})
+    return render(request, 'profile/profile.html',{"form":form})
 
 
 @login_required(login_url='/accounts/login/')
@@ -65,6 +66,7 @@ def display_profile(request, id):
     return render(request,'profile/profile.html', {"images": images, "profile":profile})
 
 
+
 @login_required(login_url='/accounts/login/')
 def search(request):
     profiles = User.objects.all()
@@ -75,7 +77,7 @@ def search(request):
         message = f'{search_term}'
         profile_pic = User.objects.all()
 
-        return render(request,'search.html',{"message":message, 'results':searched_users, 'profile_pic':profile_pic})
+        return render(request,'search.html',{"message":message, 'results':results, 'profile_pic':profile_pic})
 
     return render(request, 'search.html', {'message':message})
 

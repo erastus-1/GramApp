@@ -1,5 +1,7 @@
+from friendship.models import Friend,Follow,Block
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
+from tinymce.models import HTMLField
 from django.utils import timezone
 from vote.models import VoteModel
 from django.db import models
@@ -9,7 +11,7 @@ import cloudinary
 # Create your models here.
 class Profile(models.Model):
     profile_pic =CloudinaryField('image', blank=True) 
-    bio = models.CharField(max_length=255)
+    bio = HTMLField(blank=True)
     owner = models.OneToOneField(User,blank=True, on_delete=models.CASCADE, related_name="profile")
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
@@ -35,14 +37,12 @@ class Profile(models.Model):
         return profiles
 
 
-class Image(VoteModel,models.Model):
-    pic=CloudinaryField('image', blank=True)
+class Image(models.Model):
+    pic = CloudinaryField('image', blank=True)
     name= models.CharField(max_length=55)
-    caption = models.TextField(blank=True)
+    caption = models.CharField(max_length=500,blank=True)
     profile= models.ForeignKey(User, blank=True,on_delete=models.CASCADE)
-    profile_details = models.ForeignKey(Profile,on_delete=models.CASCADE)
     date_uploaded = models.DateTimeField(auto_now_add=True)
-    like_add = models.PositiveIntegerField(default=0, blank=True)
 
     def __str__(self):
         return str(self.name)
@@ -65,7 +65,7 @@ class Image(VoteModel,models.Model):
 class Comment(models.Model):
     image = models.ForeignKey(Image,blank=True, on_delete=models.CASCADE,related_name='comment')
     comment_owner = models.ForeignKey(User, blank=True,on_delete=models.CASCADE)
-    comment= models.TextField()
+    comment=  models.CharField(max_length = 250, blank=True)
     posted = models.DateTimeField(auto_now_add=True)
 
 
@@ -100,7 +100,7 @@ class Likes(VoteModel,models.Model):
 
 class Follow(models.Model):
     follower = models.ForeignKey(User,on_delete=models.CASCADE, null=True, related_name='follower')
-    following = models.ForeignKey(User,on_delete=models.CASCADE, null=True, related_name='following')
+    followee = models.ForeignKey(User,on_delete=models.CASCADE, null=True, related_name='followee')
     
     def save_follow(self):
         self.save()

@@ -40,6 +40,7 @@ api_secret='0ZHoI9TJhb2rK_R1dT0q8FmCeWo'
 
 INSTALLED_APPS = [
     'gramapp',
+    'friendship',
     'bootstrap4',
     'vote',
     'registration',

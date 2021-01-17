@@ -6,11 +6,13 @@ from . import views
 urlpatterns=[
     url('^$',views.home,name = 'home'),
     url('search/', views.search, name='search'),
-    url(r'^image/$', views.add_image, name='upload_image'),
-    url(r'^comment/(?P<image_id>\d+)', views.comment, name='comment'),
-    url(r'^follow/(?P<user_id>\d+)', views.follow, name = 'follow'),
-    url(r'^unfollow/(?P<user_id>\d+)', views.unfollow, name='unfollow'),
-    url(r'^like/(\d+)/$', views.like,name='like')
+    url('image/', views.add_image, name='upload_image'),
+    url('newprofile/',views.profile,name ='profile'),
+    url('showprofile/(?P<id>\d+)',views.display_profile,name = 'showprofile'),
+    url('comment/(?P<image_id>\d+)', views.comment, name='comment'),
+    url('follow/(?P<user_id>\d+)', views.follow, name = 'follow'),
+    url('unfollow/(?P<user_id>\d+)', views.unfollow, name='unfollow'),
+    url('like/(\d+)/$', views.like,name='like')
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
