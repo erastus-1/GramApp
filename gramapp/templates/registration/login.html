@@ -6,10 +6,10 @@
     <div class="row sign-up">
         <div class="col-md-4">
             {% if form.errors %}
-            <p class="small">Password or Username is incorrect</p>
+            <p style="font-size:large; color: red;">Password or Username is incorrect</p>
             {% endif %}
             <div class="section">
-                <h1>Insta</h1>
+                <h1>InstaApp</h1>
                 <div class="form-section">
                     <form action="/accounts/login/" method="POST">
                         {% csrf_token %}
