@@ -74,6 +74,11 @@ def follow(request,user_id):
 
     return redirect('/profile/', locals())
 
+def unfollow(request, user_id):
+    other_user = User.objects.get(id = user_id)
+    follow = Follow.objects.remove_follower(request.user, other_user)
+
+    return redirect('home')
 
 def like(request, image_id):
     current_user = request.user
