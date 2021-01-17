@@ -8,14 +8,13 @@ from django.contrib.auth.models import User
 
 
 # Create your views here.
-@login_required(login_url='/accounts/login/')
 def home(request):
     current_user = request.user
     all_images = Image.objects.all()
     comments = Comment.objects.all()
     likes = Likes.objects.all
     profile = Profile.objects.all()
-    print(likes)
+
     return render(request,'home.html',locals())
 
 @login_required(login_url='accounts/login/')
@@ -30,25 +29,23 @@ def add_image(request):
             return redirect('home')
     else:
         form = ImageForm()
-
-
-    return render(request,'image.html',locals())
+    return render(request,'image.html',{"form":form})
 
 
 @login_required(login_url='/login')
 def profile(request):
     current_user = request.user
-    # profile_details = Profile.objects.get(owner_id=current_user.id)
     if request.method == 'POST':
         form = ProfileForm(request.POST,request.FILES)
         if form.is_valid():
             profile =form.save(commit=False)
             profile.owner = current_user
             profile.save()
+        return redirect('profile')
     else:
         form=ProfileForm()
 
-    return render(request, 'profile/new.html', locals())
+    return render(request, 'profile/new.html',{"form":form})
 
 
 @login_required(login_url='/accounts/login/')
@@ -64,7 +61,7 @@ def display_profile(request, id):
     people=User.objects.all()
     pip_following=Follow.objects.following(request.user)
 
-    return render(request,'profile/profile.html',locals())
+    return render(request,'profile/profile.html', {"images": images, "profile":profile})
 
 
 @login_required(login_url='/accounts/login/')
@@ -74,19 +71,20 @@ def search(request):
     if 'username' in request.GET and request.GET['username']:
         search_term = request.GET.get('username')
         results = User.objects.filter(username__icontains=search_term)
-        print(searchs)
+        message = f'{search_term}'
+        profile_pic = User.objects.all()
 
-        return render(request,'search.html',locals())
+        return render(request,'search.html',{"message":message, 'results':searched_users, 'profile_pic':profile_pic})
 
-    return redirect(home)
+    return render(request, 'search.html', {'message':message})
 
 @login_required(login_url='/accounts/login/')
 def comment(request,image_id):
     current_user=request.user
     image = Image.objects.get(id=image_id)
-    profile_owner = User.objects.get(username=current_user)
+    profile_owner = User.objects.get(username=current_user.username)
     comments = Comment.objects.all()
-    print(comments)
+    
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -94,9 +92,6 @@ def comment(request,image_id):
             comment.image = image
             comment.comment_owner = current_user
             comment.save()
-
-            print(comments)
-
 
         return redirect(home)
 

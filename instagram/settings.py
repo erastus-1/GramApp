@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,6 +30,10 @@ SECRET_KEY = ')k=l(c2&ntightv+5iskw&ijaso6nz=tubxz1sx%leci51^!b!'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+cloud_name='dna4zvvgn',
+api_key='189771367633795',
+api_secret='0ZHoI9TJhb2rK_R1dT0q8FmCeWo'
 
 
 # Application definition
@@ -130,10 +137,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
-
-cloud_name = 'dna4zvvgn',
-api_key = '189771367633795',
-api_secret = '0ZHoI9TJhb2rK_R1dT0q8FmCeWo'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
