@@ -68,3 +68,18 @@ def comment(request,image_id):
 
     return render(request, 'comment.html', locals())
 
+def follow(request,user_id):
+    users=User.objects.get(id=user_id)
+    follow = Follow.objects.add_follower(request.user, users)
+
+    return redirect('/profile/', locals())
+
+
+def like(request, image_id):
+    current_user = request.user
+    image=Image.objects.get(id=image_id)
+    new_like,created= Likes.objects.get_or_create(liker=current_user, image=image)
+    new_like.save()
+
+    return redirect('home')
+
