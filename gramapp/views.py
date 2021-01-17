@@ -32,6 +32,7 @@ def add_image(request):
 
     return render(request,'image.html',locals())
 
+@login_required(login_url='/accounts/login/')
 def search(request):
     profiles = User.objects.all()
 
@@ -44,6 +45,7 @@ def search(request):
 
     return redirect(home)
 
+@login_required(login_url='/accounts/login/')
 def comment(request,image_id):
     current_user=request.user
     image = Image.objects.get(id=image_id)
@@ -80,6 +82,7 @@ def unfollow(request, user_id):
 
     return redirect('home')
 
+@login_required(login_url='/accounts/login/')
 def like(request, image_id):
     current_user = request.user
     image=Image.objects.get(id=image_id)
