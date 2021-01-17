@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 
 
 # Create your views here.
+@login_required(login_url='accounts/login/')
 def home(request):
     current_user = request.user
     all_images = Image.objects.all()
