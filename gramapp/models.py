@@ -35,7 +35,7 @@ class Profile(models.Model):
         return profiles
 
 
-class Image(models.Model):
+class Image(VoteModel,models.Model):
     pic=CloudinaryField('image', blank=True)
     name= models.CharField(max_length=55)
     caption = models.TextField(blank=True)
@@ -98,4 +98,15 @@ class Likes(VoteModel,models.Model):
         likes = self.likes.count()
         return likes
 
+class Follow(models.Model):
+    follower = models.ForeignKey(User,on_delete=models.CASCADE, null=True, related_name='follower')
+    following = models.ForeignKey(User,on_delete=models.CASCADE, null=True, related_name='following')
+    
+    def save_follow(self):
+        self.save()
 
+    def delete_follow(self):
+        self.delete()
+
+    def __str__(self):
+        return self.following
