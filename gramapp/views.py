@@ -1,5 +1,7 @@
+from django.contrib.auth.decorators import login_required
 from .models import Image, Profile,Comment,Follow,Likes
 from .forms import ProfileForm,ImageForm,CommentForm
+from django.contrib.auth import views as auth_views
 from django.http  import HttpResponse,Http404
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
