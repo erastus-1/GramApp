@@ -1,7 +1,5 @@
 # **GRAMAPP**
 
-laughing
-
 ### **Author**
 
 *Ruiru, Erastus*
