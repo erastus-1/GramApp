@@ -6,6 +6,7 @@ from django.urls import path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('gramapp.urls')),
+    path('tinymce/', include('tinymce.urls')),
     path('accounts/', include('django_registration.backends.one_step.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/register/', views.LoginView.as_view(template_name='django_registration/registration_form.html')),
