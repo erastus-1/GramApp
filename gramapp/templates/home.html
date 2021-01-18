@@ -13,13 +13,14 @@
               <div class="card">
                   <div class="card-header">
                       {% if image %}
-                      <img src="{{user.profile.photo.url}} " alt="" style="width:50px; height:50px; border-radius:50px;z-index:3; font-family: 'Marck Script', cursive; font-weight: bold;"><span class="ml-3">{{image.profile.username}}</span>
+                      <a href="{% url 'showprofile' id=image.profile.id %}">
+                      <img src="{{image.profile_details.profile_pic.cdn_url}}" alt="" style="width:50px; height:50px; border-radius:50px;z-index:3; font-family: 'Marck Script', cursive; font-weight: bold;"><span class="ml-3">{{image.profile.username}}</span></a>
                         {% else %}
                       <i class="fa fa-user-circle fa-4x" style="background-color: blue;"></i>
                         {% endif%}
                     </div>
                   <div class="card-body">
-                        <img src="{{ image.upload_image_url.url}}" alt="" class="img-responsive img-fluid"  data-toggle="modal" data-target=#{{image.id}}>
+                        <img src="{{image.pic.cdn_url}}" alt="" class="img-responsive img-fluid"  data-toggle="modal" data-target=#{{image.id}}>
                   </div>
                   <div class="card-text">
                       <div class="icons d-flex text-center">

@@ -20,27 +20,21 @@ class Profile(models.Model):
         return str(self.bio)
 
 
-    def profile_save(self):
+    def save_profile(self):
         self.save()
 
     def delete_profile(self):
         self.delete()
     
     @classmethod
-    def update_bio(cls,id, bio):
-        display_profile = cls.objects.filter(id = id).update(bio = bio,)
-        return display_profile
-
-    @classmethod
-    def get_all_profiles(cl):
-        profile = Profile.objects.all()
+    def get_by_id(cls, id):
+        profile = Profile.objects.get(owner=id)
         return profile
 
     @classmethod
-    def update_bio(cls,id, bio):
-        update_profile = cls.objects.filter(id = id).update(bio = bio,)
-        return update_profile
-
+    def get_profile_by_username(cls, owner):
+        profiles = cls.objects.filter(owner__contains=owner)
+        return profiles
 
 class Image(models.Model):
     pic = CloudinaryField('image', blank=True)

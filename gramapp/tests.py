@@ -9,15 +9,23 @@ class ProfileTestClass(TestCase):
     test class for Profile model
     '''
     def setUp(self):
-        self.user = User.objects.create_user("testuser", "anyUser")
-        self.profile_test = Profile(profile_pic='https://unsplash.com/photos/2PODhmrvLik',
-                                            bio="test bio",
-                                            owner=self.user)
-        self.profile_test.save()
+        self.new_user = User(username='test', email='testing@gmail.com', password='5678')
+        self.new_user.save()
+        self.new_profile = Profile(photo='image.png', bio='testbio', user=self.new_user)
 
-    def test_instance_true(self):
-        self.profile_test.save()
-        self.assertTrue(isinstance(self.profile_test, Profile))
+    def test_instance(self):
+        self.assertTrue(isinstance(self.new_profile, Profile))
+
+    def test_save_method(self):
+        self.new_profile.save_profile()
+        profile = Profile.objects.all()
+        self.assertTrue(len(profile)>0)
+            
+    def test_delete_method(self):
+        self.new_profile.save_profile()
+        self.new_profile.delete_profile()
+        profile = Profile.objects.all()
+        self.assertTrue(len(profile)==0)
 
 
 class ImageTestClass(TestCase):

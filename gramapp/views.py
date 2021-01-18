@@ -28,22 +28,22 @@ def add_image(request):
             add=form.save(commit=False)
             add.profile = current_user
             add.save()
-            return render(request,'home.html',locals())
+            return redirect('home')
     else:
         form = ImageForm()
     return render(request,'image.html',locals())
+
 
 
 @login_required(login_url='/login')
 def profile(request):
     current_user = request.user
     if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES)
+        form = ProfileForm(request.POST,request.FILES)
         if form.is_valid():
             profile =form.save(commit=False)
             profile.owner = current_user
             profile.save()
-            return render(request,'profile/profile.html', locals())
     else:
         form=ProfileForm()
 
@@ -79,7 +79,7 @@ def search(request):
 
         return render(request,'results.html',locals())
 
-    return redirect(home)
+    return redirect('home')
 
 @login_required(login_url='/accounts/login/')
 def comment(request,image_id):
@@ -96,7 +96,7 @@ def comment(request,image_id):
             comment.comment_owner = current_user
             comment.save()
 
-        return redirect(home)
+        return redirect('home')
 
     else:
         form = CommentForm()
