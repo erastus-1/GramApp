@@ -1,4 +1,4 @@
-{% extends 'registration/base.html' %} {% load static %} {% load bootstrap4 %} {% load friendshiptags %}
+{% extends 'base.html' %} {% load static %} {% load bootstrap4 %} {% load friendshiptags %}
 
 {% block content %}
 <div class="container" style="margin-top:8rem">
@@ -32,7 +32,7 @@
                     </ul>
                     <ul class="list-inline">
                         <li class="list-inline-item">
-                            <span class="font-weight-bold"> Has {{images|length}} </span> Posts
+                            <span class="font-weight-bold">{{user}} Has {{images|length}} </span> Posts
                         </li>
                         <li class="font-weight-bold">Following {{following}} </li>
                         <li class="font-weight-bold">Followers {{follower}} </li>

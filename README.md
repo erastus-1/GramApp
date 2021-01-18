@@ -52,6 +52,16 @@ pip install -r requirements.txt
 
 Run python3 manage.py runserver to launch the app
 
+### **Known Bugs**
+
+1) Can Vote but not Count, The team is on it.
+
+2) Cnnot Follow others.
+
+3) Cannot Dispaly pics but still Working on it.
+
+4) Cannot Update user's Profile 
+
 ### **Dependencies**
 
 **Youtube**
