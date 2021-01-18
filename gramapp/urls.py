@@ -10,8 +10,8 @@ urlpatterns=[
     url('newprofile/',views.profile,name ='profile'),
     url('showprofile/(?P<id>\d+)',views.display_profile,name = 'showprofile'),
     url('comment/(?P<image_id>\d+)', views.comment, name='comment'),
-    url('follow/(?P<user_id>\d+)', views.follow, name = 'follow'),
-    url('like/(\d+)/$', views.like,name='like')
+    url('follow/(?P<user_id>\d+)', views.follow, name='follow'),
+    url('like/(?P<image_id>\d+)', views.like, name='like'),
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

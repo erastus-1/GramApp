@@ -44,6 +44,8 @@ def profile(request):
             profile =form.save(commit=False)
             profile.owner = current_user
             profile.save()
+        return render(request, 'profile/profile.html', locals())
+        
     else:
         form=ProfileForm()
 
@@ -58,10 +60,10 @@ def display_profile(request, id):
     images = Image.get_profile_images(id)
 
     usersss = User.objects.get(id=id)
-    follower = len(Follow.objects.followers(usersss))
-    following = len(Follow.objects.following(usersss))
+    # follower = len(Follow.objects.followers(usersss))
+    # following = len(Follow.objects.following(usersss))
     people=User.objects.all()
-    pip_following=Follow.objects.following(request.user)
+    # pip_following=Follow.objects.following(request.user)
 
     return render(request,'profile/profile.html',locals())
 

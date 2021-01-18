@@ -16,7 +16,7 @@
             </div>
       <br>
       <ul style="list-style: none">
-        <li style="list-style: none"><a class="btn btn-primary" href="/">View Profile</a></li>
+        <li style="list-style: none"><a class="btn btn-primary"  href="{% url 'showprofile' id=user.id %}">View Profile</a></li>
         <li class="owner">{{result.profile.owner}} </li>
 
       </ul>
