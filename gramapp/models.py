@@ -25,16 +25,21 @@ class Profile(models.Model):
 
     def delete_profile(self):
         self.delete()
+    
+    @classmethod
+    def update_bio(cls,id, bio):
+        display_profile = cls.objects.filter(id = id).update(bio = bio,)
+        return display_profile
 
     @classmethod
-    def get_by_id(cls, id):
-        profile = Profile.objects.get(owner=id)
+    def get_all_profiles(cl):
+        profile = Profile.objects.all()
         return profile
 
     @classmethod
-    def get_profile_by_username(cls, owner):
-        profiles = cls.objects.filter(owner__contains=owner)
-        return profiles
+    def update_bio(cls,id, bio):
+        update_profile = cls.objects.filter(id = id).update(bio = bio,)
+        return update_profile
 
 
 class Image(models.Model):
@@ -84,8 +89,8 @@ class Comment(models.Model):
         return str(self.comment)
 
 
-class Likes(VoteModel,models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+class Likes(models.Model):
+    liker = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ForeignKey(Image, on_delete=models.CASCADE)
 
     def save_likes(self):

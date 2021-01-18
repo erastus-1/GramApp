@@ -31,10 +31,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-cloud_name='dna4zvvgn',
-api_key='189771367633795',
-api_secret='0ZHoI9TJhb2rK_R1dT0q8FmCeWo'
 
+cloudinary.config(   
+  cloud_name = 'dna4zvvgn',
+  api_key = '189771367633795',
+  api_secret = '0ZHoI9TJhb2rK_R1dT0q8FmCeWo', 
+
+)
 
 # Application definition
 
@@ -45,6 +48,7 @@ INSTALLED_APPS = [
     'vote',
     'registration',
     'tinymce',
+    'cloudinary',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 @login_required(login_url='accounts/login/')
 def home(request):
     current_user = request.user
-    all_images = Image.objects.all()
+    posts = Image.objects.all()
     comments = Comment.objects.all()
     likes = Likes.objects.all
     profile = Profile.objects.all()
@@ -28,7 +28,7 @@ def add_image(request):
             add=form.save(commit=False)
             add.profile = current_user
             add.save()
-            return redirect('home')
+            return render(request,'home.html',locals())
     else:
         form = ImageForm()
     return render(request,'image.html',locals())
@@ -38,12 +38,12 @@ def add_image(request):
 def profile(request):
     current_user = request.user
     if request.method == 'POST':
-        form = ProfileForm(request.POST,request.FILES)
+        form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
             profile =form.save(commit=False)
             profile.owner = current_user
             profile.save()
-        return redirect('profile')
+            return render(request,'profile/profile.html', locals())
     else:
         form=ProfileForm()
 
@@ -89,7 +89,7 @@ def comment(request,image_id):
     comments = Comment.objects.all()
     
     if request.method == 'POST':
-        form = CommentForm(request.POST)
+        form = CommentForm(request.POST, request.FILES)
         if form.is_valid():
             comment = form.save(commit=False)
             comment.image = image
@@ -118,4 +118,5 @@ def like(request, image_id):
     new_like.save()
 
     return redirect('home')
+
 
