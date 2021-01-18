@@ -5,91 +5,98 @@
 {% block content %}
 {{block.super}}
 <div class="container-fluid" style="margin-top:8rem">
-        
-           
-      <div class="row">
-          {% for image in posts %}
-          <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8 mx-auto mb-3">
-              <div class="card">
-                  <div class="card-header">
-                      {% if image %}
-                      <a href="{% url 'showprofile' id=image.profile.id %}">
-                      <img src="{{image.profile_details.profile_pic.cdn_url}}" alt="" style="width:50px; height:50px; border-radius:50px;z-index:3; font-family: 'Marck Script', cursive; font-weight: bold;"><span class="ml-3">{{image.profile.username}}</span></a>
-                        {% else %}
-                      <i class="fa fa-user-circle fa-4x" style="background-color: blue;"></i>
-                        {% endif%}
-                    </div>
-                  <div class="card-body">
-                        <img src="{{image.pic.cdn_url}}" alt="" class="img-responsive img-fluid"  data-toggle="modal" data-target=#{{image.id}}>
-                  </div>
-                  <div class="card-text">
-                      <div class="icons d-flex text-center">
-                          <div></div>
-                          <a href=" {% url 'like' image.id %}"><i class="fa fa-heart fa-2x text-danger mr-5" style="margin:5px;"></i>{{image.like_add}}</a>
-                            
-                            <a href=" {% url 'comment' image_id=image.id %}"><i class="fa fa-comment fa-2x"></i></a><br><br>
-                            
-                      </div>
-                      <div class="caption" >
-                            <h5 style="margin:5px;"><strong>Posted by: {{image.profile.username}}</strong><br></h5>
-                            <p style="font-family: 'Merienda', cursive; text-align:center; margin:20px">{{image.caption}}</p>
-                            {% if image.comments_set.all %}
-                            <p class="" > {{image.comments_set.all|length}} comments </p>
-                            {% else %}
-                            <p class="" style="margin:5px;">0 comments </p>
-                            {% endif %}
-                      </div>
-                      
-                  </div>
-                  <div class="card-footer">
-                      <h4 style="font-weight: bold;">Comments:<span><a href="{% url 'comment' image_id=image.id %}" class="btn btn-sm btn-success" style="float:right">Add Comment</a></span></h4>
-                      
-                            {% for comment in comments %}
-                            {% if comment.image_id == image.id%}
-                           
-                            <h4><strong>{{comment.user}}</strong></h4> 
-                            <br>
-                            <h4 style="font-family: 'Marck Script', cursive;">{{comment.comment}}</h4>
-                            <p style="font-weight: bold;"> {{comment.user}}
-                              posted: {{comment.posted | timesince}} ago.</p>
-                            <hr>
-    
-                            {% endif %}
-                            {% endfor %}
-                
-                  </div>
-              </div>
-            
-          </div>
-           <!-- Modal -->
-  <div class="modal fade " id="{{image.id}}" role="dialog">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          
-          <h4 class="modal-title"><img src="{{user.profile.photo.url}} " alt="" style="width:50px; height:50px; border-radius:50px;z-index:3;"><span class="ml-3">{{image.profile.username}}</span></h4>
+
+
+  <div class="row">
+    {% for image in posts %}
+    <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8 mx-auto mb-3">
+      <div class="card">
+        <div class="card-header">
+          {% if image %}
+          <a href="{% url 'showprofile' id=image.profile.id %}">
+            <img src="{{image.profile_details.profile_pic.cdn_url}}" alt=""
+              style="width:50px; height:50px; border-radius:50px;z-index:3; font-family: 'Marck Script', cursive; font-weight: bold;"><span
+              class="ml-3">{{image.profile.username}}</span></a>
+          {% else %}
+          <i class="fa fa-user-circle fa-4x" style="background-color: blue;"></i>
+          {% endif%}
         </div>
-        <div class="modal-body">
+        <div class="card-body">
+          <img src="{{image.pic.cdn_url}}" alt="" class="img-responsive img-fluid" data-toggle="modal"
+            data-target=#{{image.id}}>
+        </div>
+        <div class="card-text">
+          <div class="icons d-flex text-center">
+            <div></div>
+            <a href=" {% url 'like' image.id %}"><i class="fa fa-heart fa-2x text-danger mr-5"
+                style="margin:5px;"></i>{{image.like_add}}</a>
+
+            <a href=" {% url 'comment' image_id=image.id %}"><i class="fa fa-comment fa-2x"></i></a><br><br>
+
+          </div>
+          <div class="caption">
+            <h5 style="margin:5px;"><strong>Posted by: {{image.profile.username}}</strong><br></h5>
+            <p style="font-family: 'Merienda', cursive; text-align:center; margin:20px">{{image.caption}}</p>
+            {% if image.comments_set.all %}
+            <p class=""> {{image.comments_set.all|length}} comments </p>
+            {% else %}
+            <p class="" style="margin:5px;">0 comments </p>
+            {% endif %}
+          </div>
+
+        </div>
+        <div class="card-footer">
+          <h4 style="font-weight: bold;">Comments:<span><a href="{% url 'comment' image_id=image.id %}"
+                class="btn btn-sm btn-success" style="float:right">Add Comment</a></span></h4>
+
+          {% for comment in comments %}
+          {% if comment.image_id == image.id%}
+
+          <h4><strong>{{comment.user}}</strong></h4>
+          <br>
+          <h4 style="font-family: 'Marck Script', cursive;">{{comment.comment}}</h4>
+          <p style="font-weight: bold;"> {{comment.user}}
+            posted: {{comment.posted | timesince}} ago.</p>
+          <hr>
+
+          {% endif %}
+          {% endfor %}
+
+        </div>
+      </div>
+
+    </div>
+    <!-- Modal -->
+    <div class="modal fade " id="{{image.id}}" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <h4 class="modal-title"><img src="{{user.profile.photo.url}} " alt=""
+                style="width:50px; height:50px; border-radius:50px;z-index:3;"><span
+                class="ml-3">{{image.profile.username}}</span></h4>
+          </div>
+          <div class="modal-body">
             <img src="{{ image.image.url}}" alt="" class="img-responsive img-fluid">
             <h5><strong>{{image.profile.username}}</strong> {{image.caption}}</h5>
             <div class="card-body ">
-                {% for comment in comments %}
-                {% if comment.image_id == image.id%}
-                <h4 style="font-weight: bold;"><strong>{{comment.user}}</strong> {{comment.comment}}</h4>
-                <p style="font-weight: bold;">Posted: {{comment.posted | timesince}} ago.</p>
-                <hr>
-                {% endif %}
-                {% endfor %}
+              {% for comment in comments %}
+              {% if comment.image_id == image.id%}
+              <h4 style="font-weight: bold;"><strong>{{comment.user}}</strong> {{comment.comment}}</h4>
+              <p style="font-weight: bold;">Posted: {{comment.posted | timesince}} ago.</p>
+              <hr>
+              {% endif %}
+              {% endfor %}
             </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
         </div>
       </div>
     </div>
+    {% endfor %}
   </div>
-  {% endfor %}
+
 </div>
-          
-      </div>
 {% endblock %}

@@ -57,10 +57,6 @@ class Image(models.Model):
         images = Image.objects.filter(profile__pk=profile)
         return images
 
-    class Meta:
-        ordering = ['-date_uploaded']
-
-
 class Comment(models.Model):
     image = models.ForeignKey(Image,blank=True, on_delete=models.CASCADE,related_name='comment')
     comment_owner = models.ForeignKey(User, blank=True,on_delete=models.CASCADE)

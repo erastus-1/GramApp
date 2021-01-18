@@ -8,7 +8,7 @@
     <div class="col-md-4"></div>
     <div class="col-md-4">
       {% if form.errors %}
-        <p style="font-size:large; color: red;"> Some Information Might be Incorrect </p>
+      <p style="font-size:large; color: red;"> Some Information Might be Incorrect </p>
       {% endif %}
       <div class="panel panel-default">
 
@@ -17,7 +17,7 @@
         </div>
         <div class="panel-body">
 
-          <form  action="/accounts/register/" method="post">
+          <form action="/accounts/register/" method="post">
             {% csrf_token %}
             {% bootstrap_form form %}
             <div class="form-group">

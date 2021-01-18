@@ -5,29 +5,31 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-        {% if results %}
+            {% if results %}
             {% for search in results %}
-            <div class="row" style="overflow:hidden;-webkit-border-radius:50px; -moz-border-radius:50px; border-radius:100px; width:90px;height:100px;">
+            <div class="row"
+                style="overflow:hidden;-webkit-border-radius:50px; -moz-border-radius:50px; border-radius:100px; width:90px;height:100px;">
                 {% if result.profile_pic %}
-                <img src="{{search.user.profile.profile_pic.url}}"  alt="image">
+                <img src="{{search.results.profile.profile_pic.url}}" alt="image">
                 {% else %}
                 <img src="/static/img/ocean.jpg" alt="image">
                 {% endif %}
             </div>
-      <br>
-      <ul style="list-style: none">
-        <li style="list-style: none"><a class="btn btn-primary"  href="{% url 'showprofile' id=user.id %}">View Profile</a></li>
-        <li class="owner">{{result.profile.owner}} </li>
+            <br>
+            <ul style="list-style: none">
+                <li style="list-style: none"><a class="btn btn-primary" href="{% url 'showprofile' id=user.id %}">View
+                        Profile</a></li>
+                <li class="owner">{{result.profile.owner}} </li>
 
-      </ul>
+            </ul>
         </div>
     </div>
-            {% endfor %}
-            <div class="row">
+    {% endfor %}
+    <div class="row">
         {% else %}
-            <div class="col-md-12 text-center">
-                <h2 style="color:brown; font-weight: bolder;">Whoops!!! we don't seem to find who you where looking for</h1>
-            </div>
+        <div class="col-md-12 text-center">
+            <h2 style="color:brown; font-weight: bolder;">Whoops!!! we don't seem to find who you where looking for</h1>
+        </div>
         {% endif %}
     </div>
 </div>

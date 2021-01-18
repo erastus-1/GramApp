@@ -5,11 +5,12 @@
     <div class="row">
         <div class="col-md-12">
             <div class="row" style="font-family: 'Pacifico', cursive; font-size:30px;">
-                <div style="overflow:hidden; -webkit-border-radius:50px; -moz-border-radius:50px; border-radius:50px; width:90px;height:90px;">
+                <div
+                    style="overflow:hidden; -webkit-border-radius:50px; -moz-border-radius:50px; border-radius:50px; width:90px;height:90px;">
                     {% if profile_details.profile_pic %}
-                        <img class="img-rounded" src="{{profile_details.profile_pic.cdn_url}}" alt="photo">
+                    <img class="img-rounded" src="{{profile_details.profile_pic.cdn_url}}" alt="photo">
                     {% else %}
-                        <img class="img-rounded" src=" {% static 'img/ocean.jpg' %}">
+                    <img class="img-rounded" src=" {% static 'img/ocean.jpg' %}">
                     {% endif %}
                 </div>
                 <div class="col-md-5 text-center">
@@ -19,7 +20,7 @@
                         </li>
                         {% if profile.owner.id == user.id %}
                         <li class="list-inline-item">
-                            <a  href="{% url 'profile' %}">Edit Profile</a>
+                            <a href="{% url 'profile' %}">Edit Profile</a>
                         </li>
                         {% else %}
                         <li class="list-inline-item">
@@ -33,7 +34,7 @@
                         <li class="list-inline-item">
                             <span class="font-weight-bold"> Has {{images|length}} </span> Posts
                         </li>
-                        <li class="font-weight-bold">Following {{following}} </li> 
+                        <li class="font-weight-bold">Following {{following}} </li>
                         <li class="font-weight-bold">Followers {{follower}} </li>
 
                         {% if people in pip_following %}
@@ -41,14 +42,15 @@
                             <span class="font-weight-bold"></span> 0 Following
                         </li>
                         {% else %}
-                          <li href="{% url 'follow' user_id=profile.id %}" class="list-inline-item">
+                        <li href="{% url 'follow' user_id=profile.id %}" class="list-inline-item">
                         </li>
 
                         {% endif %}
                     </ul>
-                    <p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">{{user}} bio: {{profile_details.bio}}</p>
+                    <p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">{{user}} bio:
+                        {{profile_details.bio}}</p>
                     {% if profile.owner == user.id %}
-                    <p><a href= "{% url 'upload_image' %}">Add Image</a></p>
+                    <p><a href="{% url 'upload_image' %}">Add Image</a></p>
                     {% endif %}
                 </div>
             </div>
@@ -67,8 +69,8 @@
                 <ul class="list-inline">
                     <li class="list-inline-item">
                         <a href=" {% url 'like' image_id=image.id %}">
-                        <i class="fa fa-heart-o" style="color: black" aria-hidden="true"></i></a>
-                        
+                            <i class="fa fa-heart-o" style="color: black" aria-hidden="true"></i></a>
+
 
                         <a href=" {% url 'comment' image_id=image.id %}">
                             <i class="fa fa-comment-o" aria-hidden="true" style="color:black;"></i></a>
@@ -76,7 +78,7 @@
                     <p>{{likes|length}} likes</p>
 
                 </ul>
-                    <ul class="list-inline">
+                <ul class="list-inline">
                     <li class="list-inline-item">
                         <h5><strong>{{image.profile.username}}</strong> {{image.caption}}</h5>
 
@@ -93,11 +95,11 @@
                     {% endif %}
                     {% endfor %}
                 </div>
-                </div>
+            </div>
         </div>
         {% empty %}
         <div class="col-md-12">
-            <h2><a href= "{% url 'upload_image' %}">Add Image</a></h2>
+            <h2><a href="{% url 'upload_image' %}">Add Image</a></h2>
 
         </div>
         {% endfor %}
