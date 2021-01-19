@@ -58,9 +58,7 @@ Run python3 manage.py runserver to launch the app
 
 2) Cnnot Follow others.
 
-3) Cannot Dispaly pics but still Working on it.
-
-4) Cannot Update user's Profile 
+3) Cannot Update user's Profile 
 
 ### **Dependencies**
 
