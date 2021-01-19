@@ -54,11 +54,9 @@ Run python3 manage.py runserver to launch the app
 
 ### **Known Bugs**
 
-1) Can Vote but not Count, The team is on it.
+1) Cannot Follow others.
 
-2) Cnnot Follow others.
-
-3) Cannot Update user's Profile 
+2) Cannot Update user's Profile 
 
 ### **Dependencies**
 

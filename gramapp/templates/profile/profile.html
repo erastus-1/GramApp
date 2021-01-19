@@ -7,7 +7,7 @@
             <div class="row">
                 <div
                     style="overflow:hidden; -webkit-border-radius:50px; -moz-border-radius:50px; border-radius:50px; width:90px;height:90px; font-weight: bold; font-size: xx-large; text-align: center;">
-                    {% if profile_details.profile_pic %}
+                    {% if profile_details.profile_pic in profile_details %}
                     <img class="img-rounded" src="{{profile_details.profile_pic.url}}" alt="Photo">
                     {% else %}
                     <img class="img-rounded" src=" {% static 'img/ocean.jpg' %}">
@@ -27,12 +27,10 @@
                             <a href="{% url 'follow' user_id=profile.id %}" class="btn btn-primary">Follow</a>
                         </li>
                         {% endif %}
-
-
                     </ul>
                     <ul class="list-inline">
                         <li class="list-inline-item">
-                            <span class="font-weight-bold">{{user}} Has {{images|length}} </span> Posts
+                            <span class="font-weight-bold" style="font-weight: bold; font-size: xx-large;">{{user}} Has {{images|length}} Posts.</span> 
                         </li>
                         <li class="font-weight-bold" style="font-weight: bold; font-size: xx-large;">Following
                             {{following}} </li>
@@ -61,51 +59,44 @@
     <div class="row">
         {% for image in images %}
         <div class="col-md-4">
-            <h3 class="card-title">{{image.caption}}</h3>
+            <h3 class="card-title"><{{image.caption}}</h3>
             <div class="card" style="width: auto">
                 <img src="{{image.pic.url}}" alt="Image" class="card-img-top">
+            </div>
+            <div class="container">
+                <ul class="list-inline">
+                    <li class="list-inline-item">
+                        <a href=" {% url 'like' image_id=image.id %}">
+                        <i class="fa fa-heart-o" style="color: black" aria-hidden="true"></i></a>
 
-
-                <div class="container">
+                        <a href=" {% url 'comment' image_id=image.id %}">
+                            <i class="fa fa-comment-o" aria-hidden="true" style="color:black;"></i></a>
+                    </li>
+                    <p style="font-size: x-large; font-weight: bold;">{{likes|length}} likes</p>
+                </ul>
                     <ul class="list-inline">
-                        <li class="list-inline-item">
-                            <a href=" {% url 'like' image_id=image.id %}">
-                                <i class="fa fa-heart-o" style="color: black" aria-hidden="true"></i></a>
+                    <li class="list-inline-item">
+                        <h5><strong>posted by {{image.profile.username}}</strong> {{image.caption}}</h5>
+                    </li>
+                </ul>
+                <div class="card-body text-center">
+                    {% for comment in comments %}
+                    {% if comment.image_id == image.id%}
+                    <p class=""> {{comments.image_id|length}} comments </p>
+                    <small>{{comment.comment_owner}}</small>
+                    <p>{{comment.comment}}</p>
+                    <hr>
 
-
-                            <a href=" {% url 'comment' image_id=image.id %}">
-                                <i class="fa fa-comment-o" aria-hidden="true" style="color:black;"></i></a>
-                        </li>
-                        <p>{{likes|length}} likes</p>
-
-                    </ul>
-                    <ul class="list-inline">
-                        <li class="list-inline-item">
-                            <h5><strong>{{image.profile.username}}</strong> {{image.caption}}</h5>
-
-                        </li>
-                    </ul>
-                    <div class="card-body text-center">
-                        {% for comment in comments %}
-                        {% if comment.image_id == image.id%}
-                        <p class=""> {{comments.image_id|length}} comments </p>
-                        <small>{{comment.comment_owner}}</small>
-                        <p>{{comment.comment}}</p>
-                        <hr>
-
-                        {% endif %}
-                        {% endfor %}
-                    </div>
+                    {% endif %}
+                    {% endfor %}
                 </div>
-            </div>
-            {% empty %}
-            <div class="col-md-12">
-                <h2><a href="{% url 'upload_image' %}">Add Image</a></h2>
-
-            </div>
-            {% endfor %}
+                </div>
         </div>
+        {% empty %}
+        <div class="col-md-12">
+            <h2><a href= "{% url 'upload_image' %}">Add Image</a></h2>
+        </div>
+        {% endfor %}
     </div>
 </div>
-
 {% endblock %}
